@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yeoyoung Yi — Software Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1b1729;
+    --bg2:#221d33;
+    --card:#2a2440;
+    --accent:#8b7bf0;
+    --accent2:#6c5ce0;
+    --text:#e9e7f2;
+    --muted:#a7a2c0;
+    --line:rgba(255,255,255,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Mulish',sans-serif;background:var(--bg);color:var(--text);
+    line-height:1.6;overflow-x:hidden;
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 26px;}
+
+  /* atmospheric background */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(60vw 60vw at 12% -8%, rgba(108,92,224,.20), transparent 60%),
+      radial-gradient(48vw 48vw at 100% 22%, rgba(139,123,240,.14), transparent 55%),
+      var(--bg);
+  }
+
+  /* fade-in on load */
+  .rise{opacity:0;transform:translateY(18px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+
+  /* ---------- HERO ---------- */
+  header{padding:104px 0 70px;}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);}
+  h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(40px,8vw,76px);line-height:1.0;margin:16px 0 10px;letter-spacing:.5px;}
+  .tagline{font-size:clamp(16px,2.4vw,21px);color:var(--muted);max-width:640px;line-height:1.5;}
+  .tagline b{color:var(--text);font-weight:600;}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:30px;
+    font-size:13.5px;font-weight:700;letter-spacing:.3px;text-decoration:none;transition:.25s;
+  }
+  .btn-solid{background:var(--accent2);color:#fff;}
+  .btn-solid:hover{background:var(--accent);transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:46px 0;border-top:1px solid var(--line);}
+  .sec-label{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;}
+  .about{font-size:17px;color:#d6d3e8;max-width:680px;line-height:1.7;}
+  .about b{color:#fff;font-weight:600;}
+
+  /* projects */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .card{
+    background:linear-gradient(180deg,var(--card),#251f3a);
+    border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;transition:.28s;position:relative;overflow:hidden;
+  }
+  .card::after{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:var(--accent);transition:width .35s;}
+  .card:hover{transform:translateY(-4px);border-color:rgba(139,123,240,.4);}
+  .card:hover::after{width:100%;}
+  .card .ico{font-size:22px;}
+  .card h3{font-size:16px;font-weight:700;margin:10px 0 4px;color:#fff;}
+  .card .role{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--accent);margin-bottom:9px;}
+  .card p{font-size:13.5px;color:var(--muted);line-height:1.55;}
+  .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px;}
+  .chip{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:20px;background:rgba(139,123,240,.13);color:#c8c0f5;border:1px solid rgba(139,123,240,.22);}
+  .note{font-size:12.5px;color:var(--muted);margin-top:18px;font-style:italic;}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px;}
+  .sk b{display:block;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+  .sk span{font-size:14px;color:#d6d3e8;}
+
+  /* contact */
+  .contact-line{font-family:'Fraunces',serif;font-size:clamp(22px,4vw,34px);font-weight:400;line-height:1.4;}
+  .contact-line a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(139,123,240,.4);}
+  .contact-line a:hover{color:#fff;}
+  .langs{margin-top:22px;font-size:13.5px;color:var(--muted);}
+  footer{padding:34px 0 50px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);}
+
+  @media(max-width:680px){
+    .grid,.skills{grid-template-columns:1fr;}
+    header{padding:78px 0 50px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow rise" style="animation-delay:.05s">Software Design · B.Sc.</div>
+    <h1 class="rise" style="animation-delay:.12s">Yeoyoung&nbsp;Yi</h1>
+    <p class="tagline rise" style="animation-delay:.2s">
+      6th-semester Software Design student at TH Aschaffenburg, focused on <b>Data Science</b>.
+      Recently led a full-stack project as <b>Product Owner &amp; Frontend Developer</b>, and built things across
+      <b>machine learning</b>, <b>DevSecOps</b> and <b>software engineering</b> — looking for a <b>5–6 month internship</b>.
+    </p>
+    <div class="cta rise" style="animation-delay:.3s">
+      <a class="btn btn-solid" href="mailto:s230180@th-ab.de">✉ Email me</a>
+      <a class="btn btn-ghost" href="https://github.com/young0i">↗ GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">About</div>
+    <p class="about">
+      I'm a Software Design student who likes turning messy real-world problems into working code.
+      My strongest experience is a <b>machine-learning project with an industry partner</b>, but I also enjoy
+      <b>CI/CD &amp; security</b>, requirements engineering and a bit of game and web development.
+      I work in a structured way and like collaborating in a team.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Selected Projects</div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="ico">🗂️</div>
+        <h3>Research Data Structuring System</h3>
+        <div class="role">Product Owner &amp; Frontend Developer · Capstone Project</div>
+        <p>Full-stack, on-premise system (GDPR-compliant) that digitizes and structures handwritten notes, audio/video
+        and Excel/Word files. Backlog &amp; sprint planning, usability testing (SUS 71/100), full documentation authorship,
+        plus implementation of all 9 React screens with role-based access control.</p>
+        <div class="stack"><span class="chip">React</span><span class="chip">FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span><span class="chip">Jira</span></div>
+      </div>
+
+      <div class="card">
+        <div class="ico">🔩</div>
+        <h3>Rim Defect Classification</h3>
+        <div class="role">Data Science · Industry partner</div>
+        <p>ML system for automatic burr detection on cast rims. My focus: fusing three CNNs
+        (EfficientNetV2, DenseNet161, ResNet50) via voting &amp; stacking — optimized for high recall (up to 98.6%).</p>
+        <div class="stack"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">scikit-learn</span><span class="chip">OpenCV</span></div>
+      </div>
+
+      <div class="card">
+        <div class="ico">🛡️</div>
+        <h3>CI/CD Security Pipeline</h3>
+        <div class="role">DevSecOps</div>
+        <p>Two GitLab CI/CD pipelines with open-source security tooling (SAST, DAST, dependency &amp; container
+        scanning) and a custom vulnerability dashboard. Apps deployed via Docker on an Ubuntu VM.</p>
+        <div class="stack"><span class="chip">GitLab CI/CD</span><span class="chip">Docker</span><span class="chip">SAST/DAST</span></div>
+      </div>
+
+      <div class="card">
+        <div class="ico">🏠</div>
+        <h3>SmartNest</h3>
+        <div class="role">Requirements Engineering</div>
+        <p>Requirements analysis for a cross-manufacturer smart-kitchen platform. My part: stakeholder analysis,
+        context &amp; domain modeling (UML), subsystem requirements and project constraints.</p>
+        <div class="stack"><span class="chip">UML</span><span class="chip">Figma</span><span class="chip">Requirements</span></div>
+      </div>
+
+      <div class="card">
+        <div class="ico">🎮</div>
+        <h3>Unity Game</h3>
+        <div class="role">Team Project</div>
+        <p>A game built with the Unity engine, with the game logic implemented in C#. Developed in a team
+        using agile methods and shared version control.</p>
+        <div class="stack"><span class="chip">C#</span><span class="chip">Unity</span></div>
+      </div>
+
+    </div>
+    <p class="note">Some university projects can't be shared publicly due to team or industry data — happy to walk through them on request.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Skills</div>
+    <div class="skills">
+      <div class="sk"><b>Languages</b><span>Python · Java · SQL · JavaScript · C# · C</span></div>
+      <div class="sk"><b>Frontend &amp; Backend</b><span>React · FastAPI · PostgreSQL · SQLAlchemy</span></div>
+      <div class="sk"><b>ML / Data Science</b><span>PyTorch · scikit-learn · OpenCV · spaCy</span></div>
+      <div class="sk"><b>DevOps &amp; Security</b><span>GitLab CI/CD · Docker · SAST/DAST</span></div>
+      <div class="sk"><b>Methods &amp; Tools</b><span>Git · Scrum · Jira · agile · UML · Usability Testing</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Get in touch</div>
+    <p class="contact-line">
+      Let's talk — <a href="mailto:s230180@th-ab.de">s230180@th-ab.de</a><br>
+      or find me on <a href="https://github.com/young0i">GitHub</a>.
+    </p>
+    <p class="langs">🌐 German (B2) · English (B1) · Korean (native) · Japanese &amp; Chinese (basics)</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Yeoyoung Yi · Software Design, TH Aschaffenburg</div>
+</footer>
+
+</body>
+</html>
